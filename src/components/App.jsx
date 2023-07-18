@@ -15,7 +15,7 @@ function App() {
 
   const [filter, setFilter] = useState('');
 
-  const isFeirstrender = useRef(true);
+  const isFirstRender = useRef(true);
 
   // ----------Запис з localStorage контактів при першому рендері---------
   useEffect(() => {
@@ -31,8 +31,8 @@ function App() {
   // ------------------------------------------------
 
   useEffect(() => {
-    if (isFeirstrender.current) {
-      isFeirstrender.current = false;
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
       return;
     }
     localStorage.setItem('contacts', JSON.stringify(contacts));
