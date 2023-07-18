@@ -17,24 +17,21 @@ function App() {
 
   const isFirstRender = useRef(true);
 
-  // ----------Запис з localStorage контактів при першому рендері---------
-  useEffect(() => {
-    if (!localStorage.getItem('contacts')) {
-      return;
-    }
-    const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
-    if (parsedContacts.length === 0) {
-      return;
-    }
-    setContacts(parsedContacts);
-  }, []);
-  // ------------------------------------------------
-
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
+      if (!localStorage.getItem('contacts')) {
+        return;
+      }
+      const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
+      if (parsedContacts.length === 0) {
+        return;
+      } else {
+        setContacts(parsedContacts);
+      }
       return;
     }
+
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
