@@ -57,6 +57,19 @@ function App() {
     setFilter(e.currentTarget.value);
   };
 
+  const showContactByName = () => {
+    if (!filter) {
+      return contacts;
+    }
+
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+  };
+
+  const contactsToRender = showContactByName();
+
   return (
     <div
       style={{
@@ -75,8 +88,7 @@ function App() {
       <Filter value={filter} onChange={changeFilter} />
 
       <ContactList
-        contacts={contacts}
-        filter={filter}
+        contactsToRender={contactsToRender}
         onDeleteContact={deleteContact}
       />
     </div>
